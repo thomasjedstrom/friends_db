@@ -1,0 +1,24 @@
+<html>
+<head>
+  <title>Friends</title>
+</head>
+<body>
+
+
+<h1>Edit Page</h1>
+
+{% for friend in all_friends: %}
+   <p>ID: {{ friend['id'] }}</p>
+   <p>First Name: {{ friend['first_name'] }}</p>
+   <p>Last Name: {{ friend['last_name'] }}</p>
+   <p>Email: {{ friend['email'] }}</p>
+   <a href="/friends/{{ friend['id'] }}/edit"></a>
+   <form action="delete" method="POST">
+     <input type="hidden" value="deleting">
+     <input type="submit" value="Delete">
+   </form>
+   <hr>
+{% endfor %}
+  <hr>
+</body>
+</html>
