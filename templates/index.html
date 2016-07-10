@@ -1,33 +1,52 @@
 <html>
 <head>
   <title>Friends</title>
+  <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
 
 
 <h1>These are all my friends!</h1>
-
-{% for friend in all_friends: %}
-   <p>ID: {{ friend['id'] }}</p>
-   <p>First Name: {{ friend['first_name'] }}</p>
-   <p>Last Name: {{ friend['last_name'] }}</p>
-   <p>Email: {{ friend['email'] }}</p>
-   <!-- EDIT -->
-   <a href="/friends/{{ friend['id'] }}/edit">Edit</a>
-   <!-- DELETE -->
-    <form action="/friends/{{ friend_id }}/delete" method="POST">
-     <input type="hidden" value="deleting">
-     <input type="submit" value="Delete">
-   </form>
-   <hr>
+  <!-- FLASH MESSAGES -->
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      {% for message in messages %}
+        <p class="flash">{{message}}</p>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+<!-- ALL FRIENDS -->
+<div id="friendscontainer">
+{% for friends in all_friends: %}
+  <div class="w3-card-12 card">
+    <p>ID: {{ friends['id'] }}</p>
+    <p>First Name: {{ friends['first_name'] }}</p>
+    <p>Last Name: {{ friends['last_name'] }}</p>
+    <p>Email: {{ friends['email'] }}</p>
+    <!-- EDIT -->
+    <a href="/friends/{{ friends['id'] }}/edit" class="w3-btn">Edit</a>
+    <!-- DELETE -->
+    <form action="/friends/{{ friends['id'] }}/delete" method="POST">
+      <input type="submit" value="Delete" class="w3-btn red">
+    </form>
+  </div>
 {% endfor %}
-  <hr>
-  <h2>Add a Friend</h2>
-  <form action='/friends' method='POST'>
-    <label for="first_name">First Name:<input type="text" name="first_name" id="first_name"></label>
-    <label for="last_name">Last Name:<input type="text" name="last_name" id="last_name"></label>
-    <label for="email">Email:<input type="text" name="email" id="email"></label>
+</div>
+  <!-- ADD A FRIEND -->
+<div class="w3-card-4">
+  <div class="w3-container w3-green">
+    <h2>Add a Friend</h2>
+  </div> 
+  <form action='/friends' method='POST' class="w3-container">
+    <label for="first_name" class="w3-label">First Name:</label>
+      <input type="text" name="first_name" id="first_name" class="w3-input w3-border w3-round-large">
+    <label for="last_name" class="w3-label">Last Name:</label>
+      <input type="text" name="last_name" id="last_name" class="w3-input w3-border w3-round-large">
+    <label for="email" class="w3-label">Email:</label>
+      <input type="text" name="email" id="email" class="w3-input w3-border w3-round-large">
     <input type="submit" value="Add">
   </form>
+</div>
 </body>
 </html>

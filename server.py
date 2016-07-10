@@ -1,6 +1,7 @@
 from flask import Flask, request, redirect, render_template, session, flash
 from mysqlconnection import MySQLConnector
 app = Flask(__name__)
+app.secret_key = 'KeepItSecretKeepItSafe'
 mysql = MySQLConnector(app, 'friendsdb')
 
 @app.route('/')
@@ -34,22 +35,22 @@ def edit(friend_id):
 @app.route('/friends/<friend_id>', methods=['GET', 'POST'])
 def update(friend_id):
     query = "UPDATE friends SET first_name = :first_name, last_name = :last_name, email = :email WHERE id = :id"
-    print friend_id
     data = {
              'first_name': request.form['first_name'], 
              'last_name':  request.form['last_name'],
              'email': request.form['email'],
              'id': friend_id
            }
-    print data
     mysql.query_db(query, data)
+    flash("User " + friend_id + " has been UPDATED in the database")
     return redirect('/')
 
-@app.route('/friends/<friend_id>/delete')
+@app.route('/friends/<friend_id>/delete', methods=['POST'])
 def delete(friend_id):
     query = "DELETE FROM friends WHERE id = :id"
     data = {'id': friend_id}
     mysql.query_db(query, data)
+    flash("User " + friend_id + " has been DELETED from the database")
     return redirect('/')
 
 
