@@ -7,9 +7,9 @@
 
 <h1>Edit Page</h1>
 {% for friends in all_friends: %}
-  <form action="/friend/{{ friend_id }}">
+  <form action="/friends/{{ friends['id'] }}" method="POST">
 
-     <p>ID: {{ friends['id'] }}</p>
+     <p>ID: {{ friends['id'] }}</p><input type="hidden" value="{{ friends['id'] }}" id="{{ friends['id'] }}">
 
      <p>First Name: {{ friends['first_name'] }}</p><label for="first_name">New First Name:<input type="text" name="first_name" id="first_name"></label>
 

@@ -26,27 +26,22 @@ def create():
 @app.route('/friends/<friend_id>/edit', methods=['GET', 'POST'])
 def edit(friend_id):
     query = "SELECT * FROM friends WHERE id = :id"
-    data = {'id': friend_id,}
+    data = {'id': friend_id}
     mysql.query_db(query, data)
     friends = mysql.query_db(query, data)
     return render_template('edit.html', all_friends=friends)
 
-
-
-
-
-
-
-
-@app.route('/friends/<friend_id>')
+@app.route('/friends/<friend_id>', methods=['GET', 'POST'])
 def update(friend_id):
     query = "UPDATE friends SET first_name = :first_name, last_name = :last_name, email = :email WHERE id = :id"
+    print friend_id
     data = {
              'first_name': request.form['first_name'], 
              'last_name':  request.form['last_name'],
              'email': request.form['email'],
              'id': friend_id
            }
+    print data
     mysql.query_db(query, data)
     return redirect('/')
 
