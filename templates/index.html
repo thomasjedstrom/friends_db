@@ -13,7 +13,7 @@
    <p>Last Name: {{ friend['last_name'] }}</p>
    <p>Email: {{ friend['email'] }}</p>
    <!-- EDIT -->
-   <a href="/friends/{{ friend['id'] }}/edit"></a>
+   <a href="/friends/{{ friend['id'] }}/edit">Edit</a>
    <!-- DELETE -->
     <form action="/friends/{{ friend_id }}/delete" method="POST">
      <input type="hidden" value="deleting">

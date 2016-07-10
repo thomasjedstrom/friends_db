@@ -6,19 +6,21 @@
 
 
 <h1>Edit Page</h1>
+{% for friends in all_friends: %}
+  <form action="/friend/{{ friend_id }}">
 
-{% for friend in all_friends: %}
-   <p>ID: {{ friend['id'] }}</p>
-   <p>First Name: {{ friend['first_name'] }}</p>
-   <p>Last Name: {{ friend['last_name'] }}</p>
-   <p>Email: {{ friend['email'] }}</p>
-   <a href="/friends/{{ friend['id'] }}/edit"></a>
-   <form action="delete" method="POST">
-     <input type="hidden" value="deleting">
-     <input type="submit" value="Delete">
+     <p>ID: {{ friends['id'] }}</p>
+
+     <p>First Name: {{ friends['first_name'] }}</p><label for="first_name">New First Name:<input type="text" name="first_name" id="first_name"></label>
+
+     <p>Last Name: {{ friends['last_name'] }}</p><label for="last_name">New Last Name:<input type="text" name="last_name" id="last_name"></label>
+     
+     <p>Email: {{ friends['email'] }}</p><label for="email">New Email:<input type="text" name="email" id="email"></label>
+
+     <input type="submit" value="Update">
+  {% endfor %}
    </form>
    <hr>
-{% endfor %}
-  <hr>
+
 </body>
 </html>
