@@ -8,7 +8,8 @@ mysql = MySQLConnector(app, 'friendsdb')
 def index():
     query = "SELECT * FROM friends"
     friends = mysql.query_db(query)
-    return render_template('index.html', all_friends=friends)
+    filename = 'static/img/friends.png'
+    return render_template('index.html', all_friends=friends, filename=filename)
 
 @app.route('/friends', methods=['POST'])
 def create():
@@ -21,9 +22,6 @@ def create():
     mysql.query_db(query, data)
     return redirect('/')
 
-
-
-
 @app.route('/friends/<friend_id>/edit', methods=['GET', 'POST'])
 def edit(friend_id):
     query = "SELECT * FROM friends WHERE id = :id"
@@ -34,7 +32,7 @@ def edit(friend_id):
 
 @app.route('/friends/<friend_id>', methods=['GET', 'POST'])
 def update(friend_id):
-    query = "UPDATE friends SET first_name = :first_name, last_name = :last_name, email = :email WHERE id = :id"
+    query = "UPDATE friends SET first_name = :first_name, last_name = :last_name, email = :email, updated_at = NOW() WHERE id = :id"
     data = {
              'first_name': request.form['first_name'], 
              'last_name':  request.form['last_name'],
@@ -42,7 +40,7 @@ def update(friend_id):
              'id': friend_id
            }
     mysql.query_db(query, data)
-    flash("User " + friend_id + " has been UPDATED in the database")
+    flash(u"User " + friend_id + " has been UPDATED in the database", 'success')
     return redirect('/')
 
 @app.route('/friends/<friend_id>/delete', methods=['POST'])
@@ -50,7 +48,7 @@ def delete(friend_id):
     query = "DELETE FROM friends WHERE id = :id"
     data = {'id': friend_id}
     mysql.query_db(query, data)
-    flash("User " + friend_id + " has been DELETED from the database")
+    flash(u"User " + friend_id + " has been DELETED from the database", 'error')
     return redirect('/')
 
 

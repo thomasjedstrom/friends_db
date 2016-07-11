@@ -1,6 +1,13 @@
+/*GLOBAL*/
+body{
+    background: gray;
+}
 *{
     font-family: sans-serif;
     text-align: center;
+}
+#title{
+    font-family: 'Permanent Marker', cursive;
 }
 #friendscontainer{
     display: flex;
@@ -9,11 +16,10 @@
     max-width: 1300px ;
     margin: auto;
 }
-.card{
-    flex: 0 0 300px;
-}
-.red{
-    background: red;
+.idcard{
+    flex: 0 0 500px;
+    background: white;
+    margin: 10px;
 }
 .w3-btn{
     margin: 5px;
@@ -24,12 +30,45 @@
     margin-top: 70px;
     background: lightgray;
 }
+.w3-card-8{
+    max-width: 500px;
+    margin: auto;
+    margin-top: 70px;
+    background: lightgray;
+}
 
+/*form{
+    padding: 30px;
+}*/
 
+#editform{
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.labelvalues{
+    margin: 30px 0px;
+}
+.labels>p{
+    text-align: right;
+}
+p{
+    margin: 0px;
+    font-size: 1.3em;
+}
+.labels{
+    display: inline-block;
+    font-weight: bold;
+}
+.values{
+    display: inline-block;
+    margin-left: 50px;
+}
 
-
-#error{
-    background: red;
+.flashes{
+    list-style-type: none;
+}
+.error{
+    background: #F44336;
     color: white;
     border: 3px solid black;
     box-shadow: 0px 5px 5px black;
@@ -38,7 +77,13 @@
     margin: auto;
     margin-bottom: 40px;
 }
-
-.flash{
-    color: red;
+.success{
+    background: #4CAF50;
+    color: white;
+    border: 3px solid black;
+    box-shadow: 0px 5px 5px black;
+    padding: 5px;
+    max-width: 500px;
+    margin: auto;
+    margin-bottom: 40px;
 }
