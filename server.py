@@ -20,6 +20,7 @@ def create():
              'email': request.form['email']
            }
     mysql.query_db(query, data)
+    flash(u"User " + data['first_name'] + " " + data['last_name'] + " has been ADDED in the database", 'success')
     return redirect('/')
 
 @app.route('/friends/<friend_id>/edit', methods=['GET', 'POST'])
